@@ -3,10 +3,6 @@ name: CI/CD Pipeline
 on:
   push:
     branches: [ main ]
-    paths-ignore:
-      - '**.md'
-    paths:
-        - 'src/**'
 
 jobs:
   build-and-test:
