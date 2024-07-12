@@ -1,20 +1,36 @@
+name: CI/CD Pipeline
+
 on:
-    push:
-      branches: [ master,main ]
+  push:
+    branches: [ master, main ]
+
 jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v2
-      - name: docker-compose up
-        env:
-          COMPOSE_INTERACTIVE_NO_CLI: 1
-        run: docker-compose up -d
-      - name: Check running containers
-        run: docker-compose ps -a
-      - name: Check logs
-        run: docker-compose logs app
-      - name: Test with pytest
-        env:
-          COMPOSE_INTERACTIVE_NO_CLI: 1
-        run: docker-compose exec app pytest
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Start Docker Compose
+      run: docker-compose up -d
+      env:
+        COMPOSE_INTERACTIVE_NO_CLI: 1
+
+    - name: Check running containers
+      run: docker-compose ps -a
+
+    - name: Check application logs
+      run: docker-compose logs app
+
+    - name: Run tests with pytest
+      run: docker-compose exec -T app pytest
+      env:
+        COMPOSE_INTERACTIVE_NO_CLI: 1
+
+    - name: Stop Docker Compose
+      if: always()
+      run: docker-compose down
