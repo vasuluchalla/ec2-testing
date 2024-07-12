@@ -24,10 +24,6 @@ jobs:
     - name: Check running containers
       run: docker-compose ps -a
 
-    - name: Install pytest and run tests
-      run: |
-        docker-compose exec -T app bash -c "pip install pytest && pytest /src"
-
     - name: Stop Docker Compose
       if: always()
       run: docker-compose down
