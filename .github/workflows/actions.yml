@@ -4,9 +4,6 @@ on:
     push: 
         branches: 
             - main
-        paths: 
-            - 'src/**'
-
 
 jobs: 
     deploy_to_ec2:
