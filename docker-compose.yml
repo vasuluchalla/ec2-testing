@@ -3,7 +3,7 @@ services:
     build: .
     container_name: app
     volumes:
-    - ./:/src
+    - ./:./app
     stdin_open: true
     tty: true
     entrypoint: /bin/bash
