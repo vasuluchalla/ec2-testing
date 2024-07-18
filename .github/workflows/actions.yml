@@ -3,9 +3,9 @@ name: CD_AIRFLOW
 on:
     push: 
         branches: 
-            - master
+            - main
         paths: 
-            - 'airflow/**'
+            - 'src/**'
 
 
 jobs: 
