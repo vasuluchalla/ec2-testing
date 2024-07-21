@@ -16,9 +16,9 @@ jobs:
     - name: Deploy server
       uses: easingthemes/ssh-deploy@main
       with:
-        ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
-        remote-host: ${{ secrets.REMOTE_HOST_AIRFLOW }}
-        remote-user: ${{ secrets.REMOTE_USER }}
+        sshPrivateKey: ${{ secrets.SERVER_SSH_KEY }}
+        remoteHost: ${{ secrets.REMOTE_HOST_AIRFLOW }}
+        remoteUser: ${{ secrets.REMOTE_USER }}
         source: "src/"
         target: "/home/ubuntu/src"
         script-after: |
