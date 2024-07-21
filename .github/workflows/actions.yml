@@ -16,12 +16,12 @@ jobs:
     - name: Deploy server
       uses: easingthemes/ssh-deploy@main
       with:
-        SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-        REMOTE_HOST: ${{ secrets.REMOTE_HOST_AIRFLOW }}
-        REMOTE_USER: ${{ secrets.REMOTE_USER }}
-        SOURCE: "src/"
-        TARGET: "/home/ubuntu/src"
-        SCRIPT_AFTER: |
+        ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+        remote-host: ${{ secrets.REMOTE_HOST_AIRFLOW }}
+        remote-user: ${{ secrets.REMOTE_USER }}
+        source: "src/"
+        target: "/home/ubuntu/src"
+        script-after: |
           echo -e "AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0" > .env
           docker build -t apache-airflow .
           docker compose up airflow-init
